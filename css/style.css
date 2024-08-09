@@ -1,0 +1,96 @@
+:root
+{
+    --headerHeight: 75px;
+    --footerHeight: 65px;
+    --borderValues: solid #1a1a1a 2px;
+}
+
+/*
+————————————————————————————————————————————————————————————————————————————————————————————
+Placing <footer> at the Bottom of the Page / Centering <main> Between the Header and Footer:
+————————————————————————————————————————————————————————————————————————————————————————————  
+
+As with previous projects, height of the <body> tag is assigned with a MINIMUM value equivalent 
+to 100% of the viewport's height (though free to expand beyond this) and a bottom padding 
+equivalent to the footer's height. The footer is positioned at the bottom of the <body> tag 
+using absolute positioning. The height of the <main> tag is also assigned with a MINIMUM value 
+of all available space between the header and the footer. It is centered between the two static 
+elements using bootstrap classes.
+*/
+
+header
+{
+    height: var(--headerHeight);
+    border-bottom: var(--borderValues);
+}
+
+body
+{
+    min-width: 305px;
+    min-height: 100vh;
+    padding-bottom: var(--footerHeight);
+    position: relative;
+}
+
+footer
+{
+    height: var(--footerHeight);
+    position: absolute;
+    bottom: 0;
+    border-top: var(--borderValues);
+}
+
+main
+{
+    min-height: calc(100vh - (var(--footerHeight)) - (var(--headerHeight)));
+    background-image: linear-gradient(#bdbdbd, #d2d2d2, #d7d7d7, #d2d2d2, #bdbdbd);
+}
+
+#inputBody
+{
+    display: grid;
+    grid-template-rows: repeat(4, auto);
+}
+
+/* 
+———————————————————————————————————————
+Space Allocation for the Right Section:
+———————————————————————————————————————
+
+The <main> tag is composed of one container. It has a single row that's divided into two 
+columns, denoted using <section> tags in our HTML. Under normal conditions, these columns 
+are arranged horizontally. However, when the viewport is compressed, they may be stacked 
+vertically. Ideally, both the left column ("Employee Information") and the right column 
+("Paycheck Results") should have the same height, which is true when both columns are 
+arranged horizontally — however, this is NOT the case when both are arranged vertically 
+("Employee Information" is taller).
+
+Why is this important? When the two sections are arranged horizontally, we want the area 
+reserved for the contents underneath the heading for the right column to be equivalent to 
+that used for the left column. In addition, we want these contents to be evenly distributed 
+throughout this space. 
+
+Of course, both columns have headings of CONSTANT and EQUAL height (45.8px). For the purpose 
+of outputting our results, the right column features a row (id = "outputBodyRow") and a 
+column (id = "outputBodyCol"). The height of the row is set to encompass 100% of its parent
+<div> MINUS the static height of the heading. Thanks to bootstrap, this translates into the 
+same height used for the column, which is the same between both columns when arranged 
+horizontally. With the height decided, we can arranged the contents of #outputBodyCol 
+by displaying everything as a CSS grid.
+*/
+
+#outputBodyRow
+{
+    height: calc(100% - 45.8px);
+}
+
+#outputBodyCol
+{
+    display: grid;
+    grid-auto-rows: 1fr;
+}
+
+#outputBodyCol, #greetingMessage
+{
+    font-size: 18.5px;
+}
